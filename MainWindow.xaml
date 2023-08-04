@@ -1,0 +1,270 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d" MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        
+        Title="Input repeater" Height="700" Width="300" Background="#FF1A1A1D" 
+        Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
+        SnapsToDevicePixels="True" WindowStyle="None">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Header-->
+            <RowDefinition Height="32"/>
+
+            <!--Text input-->
+            <RowDefinition Height="60*"/>
+
+            <!--Iterations-->
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+
+            <!--Interval-->
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+
+            <!--Wait before start-->
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+
+            <!--Start button-->
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="40*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <!--Close button-->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="0,0,0,0" Width="32" Grid.ColumnSpan="3">
+            <Button x:Name="btnClose" Content="X" Foreground="WhiteSmoke" Width="32" Height="32"
+                    BorderBrush="Transparent" Background="Transparent"
+                    Click="btnClose_Click" Cursor="Hand"
+            />
+
+
+        </StackPanel>
+
+        <!--Text field-->
+        
+        <TextBlock FontSize="18" Grid.Row="0" Foreground="FloralWhite"
+                   FontWeight="Light" FontStyle="Normal" Grid.ColumnSpan="3"
+                   Margin="15, 0, 40, 0">
+            Spam text
+        </TextBlock>
+
+        <RichTextBox Grid.Row="1" Background="#FF1A1A1D" Name="spamTextBox"
+                     Foreground="FloralWhite" Margin="5, 0, 5, 10"
+                     Grid.ColumnSpan="3">
+            <RichTextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RichTextBox.Resources>
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="Hello, world!" Name="SpamTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+
+        <!--Iterations-->
+        <TextBlock FontSize="18" Grid.Row="2" Foreground="FloralWhite"
+                   FontWeight="Light" FontStyle="Normal" Grid.ColumnSpan="3" Grid.RowSpan="2"
+                   Margin="15, 0, 5, 0">
+            Iterations
+        </TextBlock>
+
+        <RichTextBox Grid.Row="2" Background="#FF1A1A1D" Foreground="FloralWhite" Name="iterationsTextBox"
+                     Margin="5, 25, 5, 15"  Grid.RowSpan="2"
+                     AcceptsReturn="False"
+                     PreviewTextInput="NumberTextBox_PreviewTextInput">
+            <RichTextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RichTextBox.Resources>
+
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="10" Name="IterationsTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <!--Iterations up & down-->
+
+
+        <RepeatButton Grid.Column="1" Grid.Row="2" Margin="0, 5, 0, 2"
+                Delay="300" Interval="40" 
+                Name="iterationsUp" Click="iterationsUp_Click"  Cursor="Hand"
+                Content="+">
+            <RepeatButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RepeatButton.Resources>
+        </RepeatButton>
+
+        <RepeatButton Grid.Column="1" Grid.Row="3" Margin="0, 2, 0, 5"
+                Delay="300" Interval="40" 
+                Name="iterationsDown" Click="iterationsDown_Click"  Cursor="Hand"
+                Content="-">
+            <RepeatButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RepeatButton.Resources>
+        </RepeatButton>
+
+        <!--Interval-->
+        <TextBlock FontSize="18" Grid.Row="4" Foreground="FloralWhite"
+                   FontWeight="Light" FontStyle="Normal" Grid.ColumnSpan="3" Grid.RowSpan="2"
+                   Margin="15, 0, 5, 0">
+            Interval
+        </TextBlock>
+
+        <RichTextBox Grid.Row="4" Background="#FF1A1A1D"  Name="intervalTextBox" Grid.RowSpan="2"
+                     Foreground="FloralWhite" Margin="5, 25, 5, 15"
+                     AcceptsReturn="False"
+                     PreviewTextInput="NumberTextBox_PreviewTextInput">
+            <RichTextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RichTextBox.Resources>
+
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="1000" Name="IntervalTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <!--Interval up & down-->
+        <RepeatButton Grid.Column="1" Grid.Row="4" Margin="0, 5, 0, 2"
+                Delay="300" Interval="40" 
+                Name="intervalUp" Click="intervalUp_Click" Cursor="Hand"
+                Content="+">
+            <RepeatButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RepeatButton.Resources>
+        </RepeatButton>
+
+        <RepeatButton Grid.Column="1" Grid.Row="5" Margin="0, 2, 0, 5"
+                Delay="300" Interval="40" 
+                Name="intervalDown" Click="intervalDown_Click"  Cursor="Hand"
+                Content="-">
+            <RepeatButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RepeatButton.Resources>
+        </RepeatButton>
+
+        <!--Inteval listbox-->
+        <ListBox Name="intervalType" Grid.Row="4" Grid.Column="3" SelectedIndex="0" Grid.RowSpan="2"
+                 SelectionMode="Single" Margin="5, 3, 5, 3"
+                 Background="#FF1A1A1D" Foreground="FloralWhite" BorderThickness="1">
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ListBox.Resources>
+
+            <ListBoxItem FontSize="10" Cursor="Hand" Name="interval_lb_ms">milliseconds</ListBoxItem>
+            <ListBoxItem FontSize="10" Cursor="Hand" Name="interval_lb_sec">seconds</ListBoxItem>
+            <ListBoxItem FontSize="10" Cursor="Hand" Name="interval_lb_min">minutes</ListBoxItem>
+        </ListBox>
+
+        <!--Wait before start-->
+        <TextBlock FontSize="18" Grid.Row="6" Grid.RowSpan="2" Foreground="FloralWhite"
+                   FontWeight="Light" FontStyle="Normal" Grid.ColumnSpan="3"
+                   Margin="15, 0, 5, 0">
+            Wait before start
+        </TextBlock>
+
+        <RichTextBox Grid.Row="6" Background="#FF1A1A1D" Foreground="FloralWhite" Grid.RowSpan="2"
+                     Name="waitBeforeStartTextBox"
+                     Margin="5, 25, 5, 15"
+                     AcceptsReturn="False"
+                     PreviewTextInput="NumberTextBox_PreviewTextInput">
+            <RichTextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RichTextBox.Resources>
+
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="5000" Name="WaitBeforeStartTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <!--Wait before start up & down-->
+        <RepeatButton Grid.Column="1" Grid.Row="6" Margin="0, 5, 0, 2"
+                Delay="300" Interval="40" 
+                Name="WaitUp" Click="WaitUp_Click" Cursor="Hand"
+                Content="+">
+            <RepeatButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RepeatButton.Resources>
+        </RepeatButton>
+
+        <RepeatButton Grid.Column="1" Grid.Row="7" Margin="0, 2, 0, 5"
+                Delay="300" Interval="40" 
+                Name="waitDown" Click="waitDown_Click"  Cursor="Hand"
+                Content="-">
+            <RepeatButton.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </RepeatButton.Resources>
+        </RepeatButton>
+
+        <!--Wait before start listbox-->
+        <ListBox Name="WaitBeforeStartType" Grid.Row="6" Grid.Column="3" SelectedIndex="0"
+                 SelectionMode="Single" Margin="5, 3, 5, 3" Grid.RowSpan="2"
+                 Background="#FF1A1A1D" Foreground="FloralWhite" BorderThickness="1">
+            <ListBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ListBox.Resources>
+
+            <ListBoxItem FontSize="10" Cursor="Hand" Name="wait_lb_ms">milliseconds</ListBoxItem>
+            <ListBoxItem FontSize="10" Cursor="Hand" Name="wait_lb_sec">seconds</ListBoxItem>
+            <ListBoxItem FontSize="10" Cursor="Hand" Name="wait_lb_min">minutes</ListBoxItem>
+        </ListBox>
+
+        <!--Start button-->
+        <Button Name="startSpamBtn" Background="Green" Grid.Row="8"
+                BorderBrush="WhiteSmoke" BorderThickness="1"
+                Content="{Binding ButtonStartText}"
+                Margin="15, 15, 15, 15"
+                Click="startSpam_Click" ClickMode="Release"
+                Grid.ColumnSpan="3"  Cursor="Hand">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+
+    </Grid>
+</Window>
