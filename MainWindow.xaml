@@ -10,6 +10,7 @@
         Topmost="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
         SnapsToDevicePixels="True" WindowStyle="None">
 
+
     <Grid>
         <Grid.RowDefinitions>
             <!--Header-->
@@ -25,7 +26,6 @@
             <!--Interval-->
             <RowDefinition Height="5*"/>
             <RowDefinition Height="5*"/>
-
             <!--Wait before start-->
             <RowDefinition Height="5*"/>
             <RowDefinition Height="5*"/>
@@ -251,7 +251,7 @@
         </ListBox>
 
         <!--Start button-->
-        <Button Name="startSpamBtn" Background="Green" Grid.Row="8"
+        <Button Name="startSpamBtn" Grid.Row="8"
                 BorderBrush="WhiteSmoke" BorderThickness="1"
                 Content="{Binding ButtonStartText}"
                 Margin="15, 15, 15, 15"

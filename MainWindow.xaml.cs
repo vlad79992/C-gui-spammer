@@ -64,9 +64,12 @@ namespace WpfApp1
             waitForStart();
             for (int i = 0; i < Int32.Parse(IterationsTextBox.Text); i++)
             {
-                Task.Delay(1000).Wait();
+                //Task.Delay(1000).Wait();
+                Thread.Sleep(time);
                     Demo.Keyboard.Type(SpamTextBox.Text);
                     Demo.Keyboard.Type(Key.Enter);
+                    Demo.Mouse.MoveTo(new System.Drawing.Point(20, 20));
+                    Demo.Mouse.MoveTo(new System.Drawing.Point(21, 21));
             }
         } 
 
@@ -125,24 +128,21 @@ namespace WpfApp1
         }
 
         private void startSpam_Click(object sender, RoutedEventArgs e)
+        
         {
-            if (isWorking)
-            {
-                goto START;
-            }
-                startSpamBtn.Background = Brushes.Red;
-                startSpamBtn.Content = "STOP";
-                isWorking = true;
-                //showMessageBox();
-                generateInput();
+            startSpamBtn.Background = Brushes.Red;
+            startSpamBtn.Content = "WORKING";
+            isWorking = true;
+            //showMessageBox();
+            generateInput();
             //
             START:
             //
-                isWorking = false;
-                startSpamBtn.Content = "START";
-                startSpamBtn.Background = Brushes.LawnGreen;
-                isWorking=false;
-                //System.Timers.Timer timer = new System.Timers.Timer(3000);
+            isWorking = false;
+            startSpamBtn.Content = "START";
+            startSpamBtn.Background = Brushes.LawnGreen;
+            isWorking=false;
+            //System.Timers.Timer timer = new System.Timers.Timer(3000);
         }
 
         private void iterationsUp_Click(object sender, RoutedEventArgs e)
