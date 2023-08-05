@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Security;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
-using Demo;
 
 
 namespace WpfApp1
@@ -36,13 +32,13 @@ namespace WpfApp1
         private void waitForStart()
         {
             int timeStart = Int32.Parse(WaitBeforeStartTextBox.Text);
-            if (WaitBeforeStartType.SelectedIndex == 1 )
+            if (WaitBeforeStartType.SelectedIndex == 1)
             {
                 timeStart *= 1000;
             }
             if (WaitBeforeStartType.SelectedIndex == 2)
             {
-                timeStart *= (1000  * 60);
+                timeStart *= (1000 * 60);
             }
             Task.Delay(timeStart).Wait();
         }
@@ -66,12 +62,12 @@ namespace WpfApp1
             {
                 //Task.Delay(1000).Wait();
                 Thread.Sleep(time);
-                    Demo.Keyboard.Type(SpamTextBox.Text);
-                    Demo.Keyboard.Type(Key.Enter);
-                    Demo.Mouse.MoveTo(new System.Drawing.Point(20, 20));
-                    Demo.Mouse.MoveTo(new System.Drawing.Point(21, 21));
+                Demo.Keyboard.Type(SpamTextBox.Text);
+                Demo.Keyboard.Type(Key.Enter);
+                Demo.Mouse.MoveTo(new System.Drawing.Point(20, 20));
+                Demo.Mouse.MoveTo(new System.Drawing.Point(21, 21));
             }
-        } 
+        }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -91,13 +87,13 @@ namespace WpfApp1
             stats += "Wait before start = " + WaitBeforeStartTextBox.Text + " " + WaitBeforeStartType.SelectedValue + "\n";
             string textErrors = "";
             if (!IterationsTextBox.Text.All(char.IsDigit) || !(IterationsTextBox.Text.Length > 0)
-                || Int32.Parse(IterationsTextBox.Text) < 0) 
+                || Int32.Parse(IterationsTextBox.Text) < 0)
             {
                 textErrors += "Iterations must be an unsigned integer\n";
                 IterationsTextBox.Text = "10";
             }
             if (!IntervalTextBox.Text.All(char.IsDigit) || !(IntervalTextBox.Text.Length > 0)
-                || Int32.Parse(IntervalTextBox.Text) < 0) 
+                || Int32.Parse(IntervalTextBox.Text) < 0)
             {
                 textErrors += "Interval must be an unsigned integer\n";
                 IntervalTextBox.Text = "1000";
@@ -128,20 +124,20 @@ namespace WpfApp1
         }
 
         private void startSpam_Click(object sender, RoutedEventArgs e)
-        
+
         {
             startSpamBtn.Background = Brushes.Red;
             startSpamBtn.Content = "WORKING";
             isWorking = true;
             //showMessageBox();
             generateInput();
-            //
-            START:
+        //
+        START:
             //
             isWorking = false;
             startSpamBtn.Content = "START";
             startSpamBtn.Background = Brushes.LawnGreen;
-            isWorking=false;
+            isWorking = false;
             //System.Timers.Timer timer = new System.Timers.Timer(3000);
         }
 
@@ -155,7 +151,7 @@ namespace WpfApp1
                 text = result.ToString();
                 IterationsTextBox.Text = text;
             }
-            catch(FormatException) { }
+            catch (FormatException) { }
         }
 
         private void iterationsDown_Click(object sender, RoutedEventArgs e)
